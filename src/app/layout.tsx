@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: "The Blog",
@@ -17,11 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body>
+    <html lang="en" className={cn("font-sans", geist.variable)} >
+      <body className="antialiased">
         <Navbar />
-        {children}
+        <main className="pt-24 min-h-screen">
+          {children}
+        </main>
       </body>
-    </html >
+    </html>
   );
 }
