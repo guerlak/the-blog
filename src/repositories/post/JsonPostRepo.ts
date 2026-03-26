@@ -43,9 +43,21 @@ class JsonPostRepo implements PostRepository {
     if (!post) {
         throw new Error("Post not found");
     }
-
+    
     return post;
   }
+
+  async findById(id: string): Promise<PostModel | null> {
+    const posts = await this._getPosts();
+
+    const post = posts.find((post) => post.id === id) || null;
+
+    if (!post) {
+        throw new Error("Post not found");
+    }
+
+    return post;    
+  } 
 }
 
 export default JsonPostRepo;

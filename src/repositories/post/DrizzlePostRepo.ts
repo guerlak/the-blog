@@ -42,6 +42,16 @@ class DrizzlePostRepo implements PostRepository {
 
     return post;    
   }
+
+  async findById(id: string): Promise<PostModel | null> {
+    const post = await db.query.postsTable.findFirst({
+      where: (posts, { eq }) => eq(posts.id, id),
+    });
+
+    if (!post) throw new Error('Post não encontrado para id');
+
+    return post;    
+  } 
 }
 
-export default DrizzlePostRepo;
+export default DrizzlePostRepo; 

@@ -7,5 +7,8 @@ export const postQueries = {
     }),
     findPostBySlugCached: cache(async (slug: string) => {
         return await postRepository.findBySlug(slug);
-    })
+    }),
+    findPostByIdCached: cache(async (id: string) => {
+        return await postRepository.findById(id);
+    }),
 }   
