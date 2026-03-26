@@ -1,5 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "About",
+}
 
 export default function AboutPage() {
     return (
@@ -12,15 +16,6 @@ export default function AboutPage() {
                         <div className="md:col-span-5 relative group">
                             <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-2xl opacity-20 blur-2xl group-hover:opacity-30 transition-opacity duration-500"></div>
                             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl border border-white/10">
-                                {/* 
-                  Note: Using the generated image path here. 
-                  In a real scenario, I'd move this to public/ and use a relative path.
-                  Since I can't easily move it to public/ for a fast demo, I'll use a placeholder or the absolute path if it works (local dev).
-                  Actually, I'll try to use a local placeholder if I can't move it.
-                  Wait, I can just use the absolute path in the `Image` component for local development if the dev server allows it, but it's risky.
-                  Better yet, I'll just use a high-quality Unsplash image for the demo if I can't easily copy the file.
-                  Or I can try to use `cp` to copy it to `public/`.
-                */}
                                 <Image
                                     src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=1000"
                                     alt="About Author"

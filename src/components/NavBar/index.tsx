@@ -9,6 +9,10 @@ export default function Navbar() {
                     THE BLOG
                 </Link>
 
+                <Link href="/about" className="text-xl font-bold tracking-tight hover:text-indigo-500 transition-colors">
+                    Sobre mim
+                </Link>
+
             </div>
         </nav>
     )
