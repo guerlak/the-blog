@@ -11,17 +11,6 @@ class DrizzlePostRepo implements PostRepository {
     return postsResult;
   }
 
-  async findAllPublic(): Promise<PostModel[]> {
-   
-
-    const posts = await db.query.postsTable.findMany({
-      orderBy: (posts, { desc }) => desc(posts.createdAt),
-      where: (posts, { eq }) => eq(posts.isPublished, true),
-    });
-
-    return posts;
-  }
-
   async findAllPublished(): Promise<PostModel[]> {  
     const posts = await db.query.postsTable.findMany({
       orderBy: (posts, { desc }) => [desc(posts.createdAt)],
@@ -52,6 +41,33 @@ class DrizzlePostRepo implements PostRepository {
 
     return post;    
   } 
+
+  async create(post: Omit<PostModel, "id" | "createdAt" | "updatedAt">): Promise<PostModel> {
+    const id = crypto.randomUUID();
+    const createdAt = new Date().toISOString();
+    const updatedAt = createdAt;
+
+    const newPost: PostModel = { ...post, id, createdAt, updatedAt };
+
+    await db.insert(postsTable).values(newPost);
+    return newPost;
+  }
+
+  async update(id: string, post: Partial<Omit<PostModel, "id" | "createdAt" | "updatedAt">>): Promise<PostModel> {
+    const updatedAt = new Date().toISOString();
+    
+    await db.update(postsTable)
+      .set({ ...post, updatedAt })
+      .where(eq(postsTable.id, id));
+
+    const updatedPost = await this.findById(id);
+    if (!updatedPost) throw new Error("Post not found after update");
+    return updatedPost;
+  }
+
+  async delete(id: string): Promise<void> {
+    await db.delete(postsTable).where(eq(postsTable.id, id));
+  }
 }
 
 export default DrizzlePostRepo; 
