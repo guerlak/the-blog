@@ -1,11 +1,11 @@
-import { jsonPostRepo } from "@/src/repositories/post/JsonPostRepo";
+import { drizzlePostRepo } from "@/src/repositories/post/DrizzlePostRepo";
 import { cache } from "react";
 
 export const postQueries = {
     findAllPublishedPostsCached: cache(async () => {
-        return await jsonPostRepo.findAllPublished();
+        return await drizzlePostRepo.findAllPublished();
     }),
     findPostBySlugCached: cache(async (slug: string) => {
-        return await jsonPostRepo.findBySlug(slug);
+        return await drizzlePostRepo.findBySlug(slug);
     })
 }   
