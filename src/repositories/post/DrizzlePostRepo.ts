@@ -44,4 +44,4 @@ class DrizzlePostRepo implements PostRepository {
   }
 }
 
-export const drizzlePostRepo: PostRepository = new DrizzlePostRepo();   
+export default DrizzlePostRepo;

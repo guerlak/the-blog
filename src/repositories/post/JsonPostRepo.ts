@@ -3,7 +3,7 @@ import { PostRepository } from "./IPostRepo";
 import fs from "fs/promises";
 import path from "path";
 
-const SIMULATED_DELAY_TIME =800;
+const SIMULATED_DELAY_TIME = 800;
 const DB_PATH = path.join(process.cwd(), "src/db/seed/posts.json");
 
 class JsonPostRepo implements PostRepository {
@@ -48,4 +48,4 @@ class JsonPostRepo implements PostRepository {
   }
 }
 
-export const jsonPostRepo: PostRepository = new JsonPostRepo();
+export default JsonPostRepo;
