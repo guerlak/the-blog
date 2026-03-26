@@ -3,10 +3,10 @@ export type PostModel = {
   title: string;
   slug: string;
   excerpt: string;
-  content: string;
+  author: string;
   coverImageUrl: string;
+  content: string;
   isPublished: boolean;
   createdAt: string;
   updatedAt: string;
-  author?: string;
 };

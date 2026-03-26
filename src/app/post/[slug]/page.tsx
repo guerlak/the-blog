@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PostSlugParams) {
 
 export default async function PostSlugPage({ params }: PostSlugParams) {
 
-    throw new Error("Erro ao carregar o post");
+    //throw new Error("Erro ao carregar o post");
 
     const { slug } = await params;
     let post;

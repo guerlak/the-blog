@@ -7,10 +7,20 @@ const SIMULATED_DELAY_TIME =800;
 const DB_PATH = path.join(process.cwd(), "src/db/seed/posts.json");
 
 class JsonPostRepo implements PostRepository {
+
   private async _getPosts(): Promise<PostModel[]> {
     const content = await fs.readFile(DB_PATH, "utf-8");
     const db = JSON.parse(content);
     return db.posts;
+  }
+  
+  async findAll(): Promise<PostModel[]> {
+  
+    const posts = await this._getPosts();
+    if (!posts) {
+      throw new Error("Posts not found");
+    }
+    return posts;
   }
 
   async findAllPublished() {
