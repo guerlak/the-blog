@@ -1,9 +1,9 @@
 import DrizzlePostRepo from "@/src/repositories/post/DrizzlePostRepo";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Plus, Edit, Trash2, ExternalLink, FileText, Calendar, LayoutDashboard } from "lucide-react";
+import { Plus, Edit, ExternalLink, FileText, Calendar, LayoutDashboard } from "lucide-react";
 import { format } from "date-fns";
-import { deletePost } from "./actions";
+import AdminDeleteBtn from "../AdminDeleteBtn";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +25,8 @@ export default async function AdminPostPage() {
                 </div>
                 <Link
                     href="/admin/posts/new"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-lg shadow-blue-200 transition-all active:scale-95 group"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600
+                     hover:bg-blue-700 text-white rounded-lg font-semibold shadow-lg shadow-blue-200 transition-all active:scale-95 group"
                 >
                     <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
                     Create New Post
@@ -50,11 +51,14 @@ export default async function AdminPostPage() {
                     posts.map((post) => (
                         <div
                             key={post.id}
-                            className="group relative flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-white border border-stone-200 rounded-xl shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300"
+                            className="group relative flex flex-col sm:flex-row sm:items-center
+                             justify-between p-5 bg-white border border-stone-200 rounded-xl
+                              shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300"
                         >
                             <div className="flex-1 space-y-2">
                                 <div className="flex items-center gap-3">
-                                    <h2 className="text-xl font-bold text-stone-800 line-clamp-1 group-hover:text-blue-600 transition-colors">
+                                    <h2 className="text-xl font-bold text-stone-800 line-clamp-1
+                                     group-hover:text-blue-600 transition-colors">
                                         {post.title}
                                     </h2>
                                     <span
@@ -81,28 +85,32 @@ export default async function AdminPostPage() {
                             </div>
 
                             {/* Actions */}
-                            <div className="flex items-center gap-2 mt-4 sm:mt-0 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <div className="flex items-center gap-2 mt-4 sm:mt-0 opacity-100 sm:opacity-0
+                             group-hover:opacity-100 transition-opacity duration-200">
                                 <Link
                                     href={`/post/${post.slug}`}
-                                    className="p-2.5 text-stone-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border border-transparent hover:border-blue-100"
+                                    className="p-2.5 text-stone-400 hover:text-blue-600 hover:bg-blue-50
+                                     rounded-lg transition-colors border border-transparent hover:border-blue-100"
                                     title="View Post"
                                 >
                                     <ExternalLink className="w-5 h-5" />
                                 </Link>
                                 <Link
                                     href={`/admin/posts/edit/${post.id}`}
-                                    className="p-2.5 text-stone-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors border border-transparent hover:border-indigo-100"
+                                    className="p-2.5 text-stone-400 hover:text-indigo-600 hover:bg-indigo-50
+                                     rounded-lg transition-colors border border-transparent hover:border-indigo-100"
                                     title="Edit Post"
                                 >
                                     <Edit className="w-5 h-5" />
                                 </Link>
+                                <AdminDeleteBtn id={post.id} title={post.title} />
                                 {/* <form
-                                    action={deletePost(post.id)}
-
+                                    action={deletePost.bind(null, post.id)}
                                 >
                                     <button
                                         type="submit"
-                                        className="p-2.5 text-stone-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors border border-transparent hover:border-rose-100"
+                                        className="p-2.5 text-stone-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg 
+                                        transition-colors border border-transparent hover:border-rose-100 cursor-pointer"
                                         title="Delete Post"
                                     >
                                         <Trash2 className="w-5 h-5" />

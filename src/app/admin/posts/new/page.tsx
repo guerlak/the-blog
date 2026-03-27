@@ -1,6 +1,6 @@
 import { ArrowLeft, Send, Image as ImageIcon, Type, Link as LinkIcon, User, Layers, FileText } from "lucide-react";
 import Link from "next/link";
-import { createPost } from "../actions";
+import { createPostAction } from "../actions";
 
 export const metadata = {
     title: "Create New Post | Admin",
@@ -11,7 +11,7 @@ export default function AdminPostNewPage() {
         <div className="max-w-4xl mx-auto p-8 space-y-10 animate-in slide-in-from-bottom-5 duration-700">
             {/* Header */}
             <div className="flex flex-col gap-4 border-b pb-8 border-stone-100">
-                <Link 
+                <Link
                     href="/admin/posts"
                     className="flex items-center gap-2 text-stone-400 hover:text-stone-900 transition-colors w-fit text-sm font-semibold group"
                 >
@@ -27,7 +27,7 @@ export default function AdminPostNewPage() {
             </div>
 
             {/* Form */}
-            <form action={createPost} className="space-y-8 pb-12">
+            <form action={createPostAction} className="space-y-8 pb-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Title */}
                     <div className="space-y-2 col-span-full">

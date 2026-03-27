@@ -66,7 +66,10 @@ class DrizzlePostRepo implements PostRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await db.delete(postsTable).where(eq(postsTable.id, id));
+      const res = await db.delete(postsTable).where(eq(postsTable.id, id));
+      if(res.rowsAffected === 0){
+        throw new Error("Post not found after delete");
+      }
   }
 }
 

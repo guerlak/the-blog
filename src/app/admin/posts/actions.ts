@@ -15,7 +15,7 @@ const postSchema = z.object({
   isPublished: z.boolean().default(false),
 });
 
-export async function createPost(formData: FormData) {
+export async function createPostAction(formData: FormData) {
   const repo = new DrizzlePostRepo();
   
   const rawData = {
@@ -36,8 +36,22 @@ export async function createPost(formData: FormData) {
   redirect("/admin/posts");
 }
 
-export async function deletePost(id: string) {
-  const repo = new DrizzlePostRepo();
-  await repo.delete(id);
-  revalidatePath("/admin/posts");
+export async function deletePostAction(id: string) {
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  console.log(`Deleting post with ID: ${id}`)
+
+  
+    const repo = new DrizzlePostRepo();
+    try{
+        await repo.delete(id);
+    }catch(error){
+      console.error("Error deleting post:", error);
+      throw error;
+    }
+    // Refresh the cache so the UI updates
+
+    revalidatePath('/posts')
+  
 }

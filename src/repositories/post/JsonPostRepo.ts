@@ -7,6 +7,15 @@ const SIMULATED_DELAY_TIME = 800;
 const DB_PATH = path.join(process.cwd(), "src/db/seed/posts.json");
 
 class JsonPostRepo implements PostRepository {
+  create(post: Omit<PostModel, "id" | "createdAt" | "updatedAt">): Promise<PostModel> {
+    throw new Error("Method not implemented.");
+  }
+  update(id: string, post: Partial<Omit<PostModel, "id">>): Promise<PostModel> {
+    throw new Error("Method not implemented.");
+  }
+  delete(id: string): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 
   private async _getPosts(): Promise<PostModel[]> {
     const content = await fs.readFile(DB_PATH, "utf-8");
@@ -24,10 +33,10 @@ class JsonPostRepo implements PostRepository {
   }
 
   async findAllPublished() {
-    await new Promise((resolve) => setTimeout(resolve, SIMULATED_DELAY_TIME
-    
-    ));
+    await new Promise((resolve) => setTimeout(resolve, SIMULATED_DELAY_TIME));
+
     const posts = await this._getPosts();
+      
     if (!posts) {
         throw new Error("Posts not found");
     }
